@@ -1,0 +1,33 @@
+[
+    {
+        "id": 1,
+        "name": "Uzar",
+        "email": "uzar123@gmail.com",
+        "course": "mbbs"
+    },
+    {
+        "id": 2,
+        "name": "Frie",
+        "email": "frie.st@hotmail.com",
+        "course": "mba"
+    },
+    {
+        "id": 3,
+        "name": "Lars",
+        "email": "notlars@yahoo.com",
+        "course": "bba"
+    },
+    {
+        "id": 4,
+        "name": "Yarx",
+        "email": "yar.x@icloud.com",
+        "course": "btech"
+    },
+    {
+        "id": 5,
+        "name": "Nain",
+        "email": "nain1995@gmail.com",
+        "course": "phd"
+    }
+]
+
