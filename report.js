@@ -13,6 +13,8 @@ import fs from "fs";
 
 import express from 'express'
 
+// import { v1 as uuidv1 } from 'uuid';
+
 const app = express();
 
 app.use(express.json());
@@ -32,10 +34,26 @@ const stream = fs.createReadStream("students.json",'utf-8');
 
 // let students = stream.read();
 
+function updatedFile() {
+
+        const newstream = fs.createWriteStream("students_updated.json",[{}]);
+
+        let studJson = JSON.stringify(students);
+
+        newstream.write(studJson);
+
+        students = JSON.parse(studJson);
+
+}
+
 let students = [{}];
 
+// let i =0;
+
 stream.on('data', (chunk)=>{
+    // console.log(typeof chunk)
     students = JSON.parse(chunk);
+    // console.log(typeof students)
 });
 
 // stream.on('data', (students)=>{
@@ -48,35 +66,54 @@ stream.on('data', (chunk)=>{
 
         // fs.writeFile("students_updated.json",students);
 
-        const newstream = fs.createWriteStream("students_updated.json",[{}]);
+    // i++;
 
-        let studJson = JSON.stringify(students);
+    // let filename = "sess:" + uuidv1() + "_iter:"+i+ ".json";
 
-        newstream.write(studJson);
+    // console.log(filename);
 
-        students = JSON.parse(studJson)
+    // const newstream = fs.createWriteStream(filename,[{}]);
+
+    updatedFile();
+
+        // const newstream = fs.createWriteStream("students_updated.json",[{}]);
+
+        // let studJson = JSON.stringify(students);
+
+        // newstream.write(studJson);
+
+        // students = JSON.parse(studJson)
 
     res.send('User added')
     console.log('User added')
 })
 
-
 app.get("/students",(req,res)=>{
 
     // console.log(typeof students);
 
-    const newstream = fs.createWriteStream("students_updated.json",[{}]);
+    // i++;
 
-    let studJson = JSON.stringify(students);
+    // let filename = "sess:" + uuidv1() + "_iter:"+i+ ".json";
 
-    // fs.writeFile("students_updated.json",studJson)
-        newstream.write(studJson);
+    // console.log(filename);
 
-        students = JSON.parse(studJson)
+    // const newstream = fs.createWriteStream(filename,[{}]);
+
+    // const newstream = fs.createWriteStream("students_updated.json",[{}]);
+
+    // let studJson = JSON.stringify(students);
+
+    // // fs.writeFile("students_updated.json",studJson)
+    //     newstream.write(studJson);
+
+    //     students = JSON.parse(studJson)
 
         // fs.writeFile("students_updated.json",students);
 
     // const stream2 = fs.createWriteStream("students_updated.json");
+
+    updatedFile();
 
     res.json(students);
     console.log(students)
@@ -89,13 +126,23 @@ app.get('/students/:id',(req,res)=>{
 
         // fs.writeFile("students_updated.json",students);
 
-        const newstream = fs.createWriteStream("students_updated.json",[{}]);
+    // i++;
 
-        let studJson = JSON.stringify(students);
+    // let filename = "sess:" + uuidv1() + "_iter:"+i+ ".json";
 
-        newstream.write(studJson);
+    // console.log(filename);
 
-        students = JSON.parse(studJson)
+    // const newstream = fs.createWriteStream(filename,[{}]);
+
+    updatedFile();
+
+        // const newstream = fs.createWriteStream("students_updated.json",[{}]);
+
+        // let studJson = JSON.stringify(students);
+
+        // newstream.write(studJson);
+
+        // students = JSON.parse(studJson)
 
     res.json(student);
     console.log(student)
@@ -107,24 +154,35 @@ app.put("/students/:id", (req,res)=> {
     // let jsonObj = JSON.stringify(students)
 
     students = students.map(s => s.id == id ? {
-        ...s,
-        id: req.body.id,
-        name: req.body.name,
-        email: req.body.email,
-        course: req.body.course
+        // ...s,
+        // id: req.body.id,
+        // name: req.body.name,
+        // email: req.body.email,
+        // course: req.body.course
+        ...req.body
     } : s)
 
     // students = JSON.parse(jsonObj)
 
         // fs.writeFile("students_updated.json",students);
 
-        const newstream = fs.createWriteStream("students_updated.json",[{}]);
+    // i++;
 
-        let studJson = JSON.stringify(students);
+    // let filename = "sess:" + uuidv1() + "_iter:"+i+ ".json";
 
-        newstream.write(studJson);
+    // console.log(filename);
 
-        students = JSON.parse(studJson)
+    // const newstream = fs.createWriteStream(filename,[{}]);
+
+    updatedFile();
+
+        // const newstream = fs.createWriteStream("students_updated.json",[{}]);
+
+        // let studJson = JSON.stringify(students);
+
+        // newstream.write(studJson);
+
+        // students = JSON.parse(studJson)
 
     res.send("User updated")
     console.log("User updated")
@@ -136,13 +194,23 @@ app.delete("/students/:id", (req,res) => {
 
         // fs.writeFile("students_updated.json",students);
 
-        const newstream = fs.createWriteStream("students_updated.json",[{}]);
+    // i++;
 
-        let studJson = JSON.stringify(students);
+    // let filename = "sess:" + uuidv1() + "_iter:"+i+ ".json";
 
-        newstream.write(studJson);
+    // console.log(filename);
 
-        students = JSON.parse(studJson)
+    // const newstream = fs.createWriteStream(filename,[{}]);
+
+    updatedFile();
+
+        // const newstream = fs.createWriteStream("students_updated.json",[{}]);
+
+        // let studJson = JSON.stringify(students);
+
+        // newstream.write(studJson);
+
+        // students = JSON.parse(studJson)
 
     res.send("User deleted")
     console.log("User deleted")
@@ -158,13 +226,23 @@ app.patch("/students/:id", (req,res)=> {
 
         // fs.writeFile("students_updated.json",students);
 
-        const newstream = fs.createWriteStream("students_updated.json",[{}]);
+    // i++;
 
-        let studJson = JSON.stringify(students);
+    // let filename = "sess:" + uuidv1() + "_iter:"+i+ ".json";
 
-        newstream.write(studJson);
+    // console.log(filename);
 
-        students = JSON.parse(studJson)
+    // const newstream = fs.createWriteStream(filename,[{}]);
+
+    updatedFile();
+
+        // const newstream = fs.createWriteStream("students_updated.json",[{}]);
+
+        // let studJson = JSON.stringify(students);
+
+        // newstream.write(studJson);
+
+        // students = JSON.parse(studJson)
 
     res.send("User patched")
     console.log("User patched")
@@ -177,3 +255,5 @@ app.listen(8000, ()=>{
 // });
 
 // [{"id": 1, "name": "Uzar", "email": "uzar123@gmail.com", "course": "mbbs"},{"id": 2, "name": "Frie", "email": "frie.st@hotmail.com", "course": "mba"},{"id": 3, "name": "Lars", "email": "notlars@yahoo.com", "course": "bba"},{ "id": 4, "name": "Yarx", "email": "yar.x@icloud.com", "course": "btech"},{"id": 5, "name": "Nain", "email": "nain1995@gmail.com", "course": "phd"}]
+
+// after / is query and after ? is parameter
